@@ -219,7 +219,7 @@ export const FONT_SIZE = 32;
 export const FONT_WEIGHT = 400;
 
 export const CIRCLE_OPTIONS = {
-  radius: 225,
+  radius: 125,
   left: 100,
   top: 100,
   fill: FILL_COLOR,
@@ -232,8 +232,8 @@ export const RECTANGLE_OPTIONS = {
   fill: FILL_COLOR,
   stroke: STROKE_COLOR,
   strokeWidth: STROKE_WIDTH,
-  width: 400,
-  height: 400,
+  width: 250,
+  height: 250,
   angle: 0,
 };
 export const DIAMOND_OPTIONS = {
@@ -242,8 +242,8 @@ export const DIAMOND_OPTIONS = {
   fill: FILL_COLOR,
   stroke: STROKE_COLOR,
   strokeWidth: STROKE_WIDTH,
-  width: 600,
-  height: 600,
+  width: 350,
+  height: 350,
   angle: 0,
 };
 export const TRIANGLE_OPTIONS = {

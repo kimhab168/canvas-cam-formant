@@ -26,40 +26,40 @@ export const TextSidebar = ({
   return (
     <aside
       className={cn(
-        "bg-white relative border-r z-[40] w-[360px] h-full flex flex-col",
+        "bg-white relative border-r z-[40] w-[200px] h-full flex flex-col",
         activeTool === "text" ? "visible" : "hidden"
       )}
     >
       {/* Header Sidebar */}
       <ToolSidebarHeader title="Text" description="Add text to your canvas" />
       <ScrollArea>
-        <div className="p-4 space-y-6 border-b">
+        <div className="p-4 space-y-5 border-b">
           <Button
-            className="w-full"
+            className="w-36 h-16"
             onClick={() => editor?.addText("Hello World!")}
           >
             Textbox
           </Button>
           <Button
-            className="w-full h-16"
+            className="w-36 h-16"
             variant="secondary"
             size="lg"
             onClick={() =>
               editor?.addText("Heading", {
-                fontSize: 80,
+                fontSize: 48,
                 fontWeight: 700,
               })
             }
           >
-            <span className="text-3xl font-bold">Heading</span>
+            <span className="text-2xl font-bold">Heading</span>
           </Button>
           <Button
-            className="w-full h-16"
+            className="w-36 h-16"
             variant="secondary"
             size="lg"
             onClick={() =>
               editor?.addText("Subheading", {
-                fontSize: 44,
+                fontSize: 30,
                 fontWeight: 600,
               })
             }
@@ -67,12 +67,12 @@ export const TextSidebar = ({
             <span className="text-xl font-semibold">Sub heading</span>
           </Button>
           <Button
-            className="w-full h-16"
+            className="w-36 h-16"
             variant="secondary"
             size="lg"
             onClick={() =>
               editor?.addText("Paragraph", {
-                fontSize: 32,
+                fontSize: 18,
               })
             }
           >

@@ -30,7 +30,7 @@ export const ImagesSidebar = ({
   return (
     <aside
       className={cn(
-        "bg-white relative border-r z-[40] w-[260px] h-full flex flex-col",
+        "bg-white relative border-r z-[40] w-[200px] h-full flex flex-col",
         activeTool === "images" ? "visible" : "hidden"
       )}
     >
@@ -39,7 +39,7 @@ export const ImagesSidebar = ({
         title="Images"
         description="add Image to your canvas"
       />
-      <div className="p-8 border-b">
+      <div className="p-4 border-b">
         <UploadButton
           appearance={{
             button: "w-full text-sm font-medium",

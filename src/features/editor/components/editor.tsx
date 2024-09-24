@@ -63,17 +63,25 @@ const Editor = () => {
     };
   }, [init]);
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full w-full">
       <Navbar
         editor={editor}
         activeTool={activeTool}
         onChangeActiveTool={onChangeActiveTool}
       />
-      <div className="h-[calc(100%-68px)] w-full flex">
+      {/* test */}
+      <div className="h-20 w-full flex overflow-x-auto">
         <Sidebar
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
         />
+      </div>
+
+      <div className="h-[calc(100%-68px-80px)] w-full flex">
+        {/* <Sidebar
+          activeTool={activeTool}
+          onChangeActiveTool={onChangeActiveTool}
+        /> */}
         {/* Side bar */}
         <ShapeSidebar
           editor={editor}

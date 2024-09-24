@@ -20,11 +20,11 @@ export const SidebarItem = ({
       variant="ghost"
       onClick={onClick}
       className={cn(
-        "w-full h-full aspect-video p-2 py-3 flex flex-col rounded-none",
+        "flex-shrink-0 w-auto h-full px-4 flex flex-col rounded-none items-center justify-center",
         isActive && "bg-muted text-primary"
       )}
     >
-      <Icon className="size-5 stroke-2 shrink-0" />
+      <Icon className="size-4 stroke-2 shrink-0" />
       <span className="mt-2 text-xs">{label}</span>
     </Button>
   );

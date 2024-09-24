@@ -141,7 +141,7 @@ export const Toolbar = ({
     <div className="shrink-0 h-[56px] border-b bg-white w-full flex items-center overflow-x-auto z-[49] p-2 gap-x-2">
       {!isImage && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="Color" side="bottom" sideOffset={5}>
+          <Hint label="Color" side="top" sideOffset={5}>
             <Button
               onClick={() => onChangeActiveTool("fill")}
               size="icon"
@@ -160,7 +160,7 @@ export const Toolbar = ({
       )}
       {!isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="Stroke Color" side="bottom" sideOffset={5}>
+          <Hint label="Stroke Color" side="top" sideOffset={5}>
             <Button
               onClick={() => onChangeActiveTool("stroke-color")}
               size="icon"
@@ -179,7 +179,7 @@ export const Toolbar = ({
       )}
       {!isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="Stroke Width" side="bottom" sideOffset={5}>
+          <Hint label="Stroke Width" side="top" sideOffset={5}>
             <Button
               onClick={() => onChangeActiveTool("stroke-width")}
               size="icon"
@@ -193,7 +193,7 @@ export const Toolbar = ({
       )}
       {isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="Font family" side="bottom" sideOffset={5}>
+          <Hint label="Font family" side="top" sideOffset={5}>
             <Button
               onClick={() => onChangeActiveTool("font")}
               size="icon"
@@ -214,7 +214,7 @@ export const Toolbar = ({
       )}
       {isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="Bold" side="bottom" sideOffset={5}>
+          <Hint label="Bold" side="top" sideOffset={5}>
             <Button
               onClick={toggleBold}
               size="icon"
@@ -228,7 +228,7 @@ export const Toolbar = ({
       )}
       {isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="Italic" side="bottom" sideOffset={5}>
+          <Hint label="Italic" side="top" sideOffset={5}>
             <Button
               onClick={toggleItalic}
               size="icon"
@@ -242,7 +242,7 @@ export const Toolbar = ({
       )}
       {isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="Underline" side="bottom" sideOffset={5}>
+          <Hint label="Underline" side="top" sideOffset={5}>
             <Button
               onClick={toggleUnderline}
               size="icon"
@@ -256,7 +256,7 @@ export const Toolbar = ({
       )}
       {isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="Strike" side="bottom" sideOffset={5}>
+          <Hint label="Strike" side="top" sideOffset={5}>
             <Button
               onClick={toggleLinethrough}
               size="icon"
@@ -270,7 +270,7 @@ export const Toolbar = ({
       )}
       {isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="Align left" side="bottom" sideOffset={5}>
+          <Hint label="Align left" side="top" sideOffset={5}>
             <Button
               onClick={() => onChangeTextAlign("left")}
               size="icon"
@@ -284,7 +284,7 @@ export const Toolbar = ({
       )}
       {isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="Align center" side="bottom" sideOffset={5}>
+          <Hint label="Align center" side="top" sideOffset={5}>
             <Button
               onClick={() => onChangeTextAlign("center")}
               size="icon"
@@ -298,7 +298,7 @@ export const Toolbar = ({
       )}
       {isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="Align right" side="bottom" sideOffset={5}>
+          <Hint label="Align right" side="top" sideOffset={5}>
             <Button
               onClick={() => onChangeTextAlign("right")}
               size="icon"
@@ -320,7 +320,7 @@ export const Toolbar = ({
       )}
       {isImage && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="Filters" side="bottom" sideOffset={5}>
+          <Hint label="Filters" side="top" sideOffset={5}>
             <Button
               onClick={() => onChangeActiveTool("filter")}
               size="icon"
@@ -333,7 +333,7 @@ export const Toolbar = ({
         </div>
       )}
       <div className="flex items-center h-full justify-center">
-        <Hint label="Bring Forward" side="bottom" sideOffset={5}>
+        <Hint label="Bring Forward" side="top" sideOffset={5}>
           <Button
             onClick={() => editor?.bringForward()}
             size="icon"
@@ -344,7 +344,7 @@ export const Toolbar = ({
         </Hint>
       </div>
       <div className="flex items-center h-full justify-center">
-        <Hint label="Send Backward" side="bottom" sideOffset={5}>
+        <Hint label="Send Backward" side="top" sideOffset={5}>
           <Button
             onClick={() => editor?.sendBackwards()}
             size="icon"
@@ -355,7 +355,7 @@ export const Toolbar = ({
         </Hint>
       </div>
       <div className="flex items-center h-full justify-center">
-        <Hint label="Opacity" side="bottom" sideOffset={5}>
+        <Hint label="Opacity" side="top" sideOffset={5}>
           <Button
             onClick={() => onChangeActiveTool("opacity")}
             size="icon"
@@ -367,7 +367,7 @@ export const Toolbar = ({
         </Hint>
       </div>
       <div className="flex items-center h-full justify-center">
-        <Hint label="Duplicate" side="bottom" sideOffset={5}>
+        <Hint label="Duplicate" side="top" sideOffset={5}>
           <Button
             onClick={() => {
               editor?.onCopy();
@@ -381,7 +381,7 @@ export const Toolbar = ({
         </Hint>
       </div>
       <div className="flex items-center h-full justify-center">
-        <Hint label="Delete" side="bottom" sideOffset={5}>
+        <Hint label="Delete" side="top" sideOffset={5}>
           <Button onClick={() => editor?.delete()} size="icon" variant="ghost">
             <Trash className="size-4" />
           </Button>
