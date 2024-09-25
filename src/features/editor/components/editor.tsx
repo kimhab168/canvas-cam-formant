@@ -86,6 +86,11 @@ const Editor = () => {
             activeTool={activeTool}
             onChangeActiveTool={onChangeActiveTool}
           />
+          <FontSidebar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+          />
         </div>
       </div>
 
@@ -125,11 +130,11 @@ const Editor = () => {
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
         /> */}
-        <FontSidebar
+        {/* <FontSidebar
           editor={editor}
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
-        />
+        /> */}
         <ImagesSidebar
           editor={editor}
           activeTool={activeTool}

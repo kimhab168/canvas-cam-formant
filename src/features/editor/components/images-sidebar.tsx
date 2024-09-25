@@ -35,10 +35,10 @@ export const ImagesSidebar = ({
       )}
     >
       {/* Header Sidebar */}
-      <ToolSidebarHeader
+      {/* <ToolSidebarHeader
         title="Images"
         description="add Image to your canvas"
-      />
+      /> */}
       <div className="p-4 border-b">
         <UploadButton
           appearance={{
@@ -71,7 +71,7 @@ export const ImagesSidebar = ({
         <div className="p-4 space-y-1 border-b"></div>
       </ScrollArea>
       {/* Footer SideBar */}
-      <ToolSidebarClose onClick={onClose} />
+      {/* <ToolSidebarClose onClick={onClose} /> */}
     </aside>
   );
 };

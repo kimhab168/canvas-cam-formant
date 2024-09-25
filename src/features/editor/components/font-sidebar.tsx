@@ -28,21 +28,21 @@ export const FontSidebar = ({
   return (
     <aside
       className={cn(
-        "bg-white relative border-r z-[40] w-[360px] h-full flex flex-col",
+        "bg-white relative border-r z-[40] flex justify-center items-center",
         activeTool === "font" ? "visible" : "hidden"
       )}
     >
       {/* Header Sidebar */}
-      <ToolSidebarHeader title="Fonts" description="Change Font to your text" />
+      {/* <ToolSidebarHeader title="Fonts" description="Change Font to your text" /> */}
       <ScrollArea>
-        <div className="p-4 space-y-1 border-b">
+        <div className="p-4 space-x-3 border-b flex overflow-x-auto">
           {fonts.map((font) => (
             <Button
               key={font}
               variant="secondary"
-              size="lg"
+              size="sm"
               className={cn(
-                "w-full h-16 justify-start text-left",
+                "h-10 justify-start text-left",
                 value === font && "border-2 border-blue-500"
               )}
               style={{
@@ -58,7 +58,7 @@ export const FontSidebar = ({
         </div>
       </ScrollArea>
       {/* Footer SideBar */}
-      <ToolSidebarClose onClick={onClose} />
+      {/* <ToolSidebarClose onClick={onClose} /> */}
     </aside>
   );
 };

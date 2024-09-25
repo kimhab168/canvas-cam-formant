@@ -29,7 +29,7 @@ export const ShapeSidebar = ({
   return (
     <aside
       className={cn(
-        "bg-white relative border-r z-[40] flex w-full justify-center",
+        "bg-white relative border-r z-[40] flex justify-center items-center",
         activeTool === "shapes" ? "visible" : "hidden"
       )}
     >
@@ -39,7 +39,7 @@ export const ShapeSidebar = ({
         description="Add shapes to your canvas"
       /> */}
       <ScrollArea>
-        <div className="flex gap-4 p-4">
+        <div className="p-4 space-x-3 border-b flex overflow-x-auto">
           <ShapeTool
             onClick={() => editor?.addCircle()}
             icon={FaCircle}
