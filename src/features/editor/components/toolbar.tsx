@@ -140,7 +140,7 @@ export const Toolbar = ({
   return (
     <div className="shrink-0 h-[56px] border-b bg-white w-full flex items-center overflow-x-auto z-[49] p-2 gap-x-2">
       {!isImage && (
-        <div className="flex items-center h-full justify-center">
+        <div className="flex items-center h-full justify-center ">
           <Hint label="Color" side="top" sideOffset={5}>
             <Button
               onClick={() => onChangeActiveTool("fill")}
@@ -214,58 +214,71 @@ export const Toolbar = ({
       )}
       {isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="Bold" side="top" sideOffset={5}>
+          <Hint label="Format" side="top" sideOffset={5}>
             <Button
-              onClick={toggleBold}
+              onClick={() => onChangeActiveTool("format")}
               size="icon"
               variant="ghost"
-              className={cn(properties.fontWeight > 500 && "bg-gray-100")}
+              className={cn(activeTool === "format" && "bg-gray-100")}
             >
               <FaBold className="size-4" />
             </Button>
           </Hint>
         </div>
       )}
-      {isText && (
-        <div className="flex items-center h-full justify-center">
-          <Hint label="Italic" side="top" sideOffset={5}>
-            <Button
-              onClick={toggleItalic}
-              size="icon"
-              variant="ghost"
-              className={cn(properties.fontStyle === "italic" && "bg-gray-100")}
-            >
-              <FaItalic className="size-4" />
-            </Button>
-          </Hint>
-        </div>
-      )}
-      {isText && (
-        <div className="flex items-center h-full justify-center">
-          <Hint label="Underline" side="top" sideOffset={5}>
-            <Button
-              onClick={toggleUnderline}
-              size="icon"
-              variant="ghost"
-              className={cn(properties.fontUnderline && "bg-gray-100")}
-            >
-              <FaUnderline className="size-4" />
-            </Button>
-          </Hint>
-        </div>
-      )}
-      {isText && (
-        <div className="flex items-center h-full justify-center">
-          <Hint label="Strike" side="top" sideOffset={5}>
-            <Button
-              onClick={toggleLinethrough}
-              size="icon"
-              variant="ghost"
-              className={cn(properties.fontLinethrough && "bg-gray-100")}
-            >
-              <FaStrikethrough className="size-4" />
-            </Button>
-          </Hint>
+
+      {isText && activeTool === "format" && (
+        <div className="flex absolute bottom-[108px] z-[40] left-20 bg-white p-1">
+          <div className="flex items-center h-full justify-center">
+            <Hint label="Bold" side="top" sideOffset={5}>
+              <Button
+                onClick={toggleBold}
+                size="icon"
+                variant="ghost"
+                className={cn(properties.fontWeight > 500 && "bg-gray-100")}
+              >
+                <FaBold className="size-4" />
+              </Button>
+            </Hint>
+          </div>
+          <div className="flex items-center h-full justify-center">
+            <Hint label="Italic" side="top" sideOffset={5}>
+              <Button
+                onClick={toggleItalic}
+                size="icon"
+                variant="ghost"
+                className={cn(
+                  properties.fontStyle === "italic" && "bg-gray-100"
+                )}
+              >
+                <FaItalic className="size-4" />
+              </Button>
+            </Hint>
+          </div>
+          <div className="flex items-center h-full justify-center">
+            <Hint label="Underline" side="top" sideOffset={5}>
+              <Button
+                onClick={toggleUnderline}
+                size="icon"
+                variant="ghost"
+                className={cn(properties.fontUnderline && "bg-gray-100")}
+              >
+                <FaUnderline className="size-4" />
+              </Button>
+            </Hint>
+          </div>
+          <div className="flex items-center h-full justify-center">
+            <Hint label="Strike" side="top" sideOffset={5}>
+              <Button
+                onClick={toggleLinethrough}
+                size="icon"
+                variant="ghost"
+                className={cn(properties.fontLinethrough && "bg-gray-100")}
+              >
+                <FaStrikethrough className="size-4" />
+              </Button>
+            </Hint>
+          </div>
         </div>
       )}
       {isText && (

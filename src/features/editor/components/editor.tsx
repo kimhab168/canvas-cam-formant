@@ -63,36 +63,48 @@ const Editor = () => {
     };
   }, [init]);
   return (
-    <div className="flex flex-col h-full w-full">
+    <div className="flex flex-col h-full w-full relative">
       <Navbar
         editor={editor}
         activeTool={activeTool}
         onChangeActiveTool={onChangeActiveTool}
       />
       {/* test */}
-      <div className="h-20 w-full flex overflow-x-auto">
+      <div className="w-full flex">
         <Sidebar
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
         />
+        <div className="w-full flex overflow-x-auto absolute top-[calc(68px+64px)]">
+          <TextSidebar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+          />
+          <ShapeSidebar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+          />
+        </div>
       </div>
 
-      <div className="h-[calc(100%-68px-80px)] w-full flex">
+      <div className="h-[calc(100%-68px-80px)] flex">
         {/* <Sidebar
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
         /> */}
         {/* Side bar */}
-        <ShapeSidebar
+        {/* <ShapeSidebar
           editor={editor}
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
-        />
-        <FillColorSidebar
+        /> */}
+        {/* <FillColorSidebar
           editor={editor}
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
-        />
+        /> */}
         <StrokeColorSidebar
           editor={editor}
           activeTool={activeTool}
@@ -108,11 +120,11 @@ const Editor = () => {
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
         />
-        <TextSidebar
+        {/* <TextSidebar
           editor={editor}
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
-        />
+        /> */}
         <FontSidebar
           editor={editor}
           activeTool={activeTool}
@@ -134,7 +146,7 @@ const Editor = () => {
           onChangeActiveTool={onChangeActiveTool}
         />
         {/* End of Side bar */}
-        <main className="bg-muted flex-1 overflow-auto relative flex flex-col">
+        <main className="bg-muted flex-1 overflow-x-auto flex flex-col relative">
           <div
             className="flex-1 h-[calc(100%-124px)] bg-muted"
             ref={containerRef}
@@ -146,6 +158,11 @@ const Editor = () => {
             activeTool={activeTool}
             onChangeActiveTool={onChangeActiveTool}
             key={JSON.stringify(editor?.canvas.getActiveObject())}
+          />
+          <FillColorSidebar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
           />
           <Footer editor={editor} />
         </main>

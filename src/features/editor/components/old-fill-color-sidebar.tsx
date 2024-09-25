@@ -33,18 +33,22 @@ export const FillColorSidebar = ({
   return (
     <aside
       className={cn(
-        "bg-red-200 border-r z-[40] flex absolute justify-center bottom-[108px] w-full",
+        "bg-white relative border-r z-[40] w-[300px] h-full flex flex-col",
         activeTool === "fill" ? "visible" : "hidden"
       )}
     >
       {/* Header Sidebar */}
-      {/* <ToolSidebarHeader
+      <ToolSidebarHeader
         title="Fill Color"
         description="Add fill color to your element"
-      /> */}
-      <ColorPicker value={value} onChange={onChange} />
+      />
+      <ScrollArea>
+        <div className="p-4 space-y-6">
+          <ColorPicker value={value} onChange={onChange} />
+        </div>
+      </ScrollArea>
       {/* Footer SideBar */}
-      {/* <ToolSidebarClose onClick={onClose} /> */}
+      <ToolSidebarClose onClick={onClose} />
     </aside>
   );
 };

@@ -29,37 +29,51 @@ export const ShapeSidebar = ({
   return (
     <aside
       className={cn(
-        "bg-white relative border-r z-[40] w-[200px] h-full flex flex-col",
+        "bg-white relative border-r z-[40] flex w-full justify-center",
         activeTool === "shapes" ? "visible" : "hidden"
       )}
     >
       {/* Header Sidebar */}
-      <ToolSidebarHeader
+      {/* <ToolSidebarHeader
         title="Shapes"
         description="Add shapes to your canvas"
-      />
+      /> */}
       <ScrollArea>
-        <div className="grid grid-cols-1 gap-4 p-4">
-          <ShapeTool onClick={() => editor?.addCircle()} icon={FaCircle} />
+        <div className="flex gap-4 p-4">
+          <ShapeTool
+            onClick={() => editor?.addCircle()}
+            icon={FaCircle}
+            iconClassName="size-9"
+          />
           <ShapeTool
             onClick={() => editor?.addSoftRectangle()}
             icon={FaSquare}
+            iconClassName="size-9"
           />
           <ShapeTool
             onClick={() => editor?.addRectangle()}
             icon={FaSquareFull}
+            iconClassName="size-9"
           />
-          <ShapeTool onClick={() => editor?.addTriangle()} icon={IoTriangle} />
+          <ShapeTool
+            onClick={() => editor?.addTriangle()}
+            icon={IoTriangle}
+            iconClassName="size-9"
+          />
           <ShapeTool
             onClick={() => editor?.addInverseTriangle()}
             icon={IoTriangle}
-            iconClassName="rotate-180"
+            iconClassName="rotate-180 size-9"
           />
-          <ShapeTool onClick={() => editor?.addDiamond()} icon={FaDiamond} />
+          <ShapeTool
+            onClick={() => editor?.addDiamond()}
+            icon={FaDiamond}
+            iconClassName="size-9"
+          />
         </div>
       </ScrollArea>
       {/* Footer SideBar */}
-      <ToolSidebarClose onClick={onClose} />
+      {/* <ToolSidebarClose onClick={onClose} /> */}
     </aside>
   );
 };

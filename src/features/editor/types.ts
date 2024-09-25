@@ -127,7 +127,8 @@ export type ActiveTool =
   | "settings"
   | "ai"
   | "remove-bg"
-  | "templates";
+  | "templates"
+  | "format";
 
 export type BuildEditorProps = {
   save: (skip?: boolean) => void;

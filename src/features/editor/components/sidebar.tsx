@@ -20,7 +20,7 @@ interface SidebarProps {
 
 export function Sidebar({ activeTool, onChangeActiveTool }: SidebarProps) {
   return (
-    <aside className="bg-white h-20 border-r flex w-full overflow-x-auto whitespace-nowrap gap-x-2">
+    <aside className="bg-white border-r flex w-full h-full overflow-x-scroll whitespace-nowrap items-center justify-center">
       <SidebarItem
         icon={LayoutTemplate}
         label="Design"
@@ -45,12 +45,12 @@ export function Sidebar({ activeTool, onChangeActiveTool }: SidebarProps) {
         isActive={activeTool === "shapes"}
         onClick={() => onChangeActiveTool("shapes")}
       />
-      <SidebarItem
+      {/* <SidebarItem
         icon={Sparkles}
         label="AI"
         isActive={activeTool === "ai"}
         onClick={() => onChangeActiveTool("ai")}
-      />
+      /> */}
       <SidebarItem
         icon={Settings}
         label="Settings"
