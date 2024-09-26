@@ -32,6 +32,7 @@ import { useClipboard } from "@/features/editor/hooks/use-clipboard";
 import { useHistory } from "@/features/editor/hooks/use-history";
 import { useHotKeys } from "@/features/editor/hooks/use-hotkeys";
 import { useWindowEvent } from "@/features/editor/hooks/use-window-events";
+import { useArrowKey } from "./use-arrowKey";
 const buildEditor = ({
   save,
   undo,
@@ -172,6 +173,7 @@ const buildEditor = ({
     onRedo: () => redo(),
     onCopy: () => copy(),
     onPaste: () => paste(),
+    // onMoveLeft:()=>,
     changeImageFilter: (value: string) => {
       const objects = canvas.getActiveObjects();
       objects.forEach((object) => {
@@ -576,6 +578,8 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
   //clipboard hook (copy & paste features)
   const { copy, paste } = useClipboard({ canvas });
 
+  const { moveLeft, moveDown, moveRight, moveUp } = useArrowKey({ canvas }); //TODO:
+
   const { autoZoom } = useAutoResize({ canvas, container });
 
   UseCanvasEvents({
@@ -585,7 +589,18 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
     clearSelectionCallback,
   });
 
-  useHotKeys({ canvas, save, redo, undo, copy, paste }); //paste to make shortcut keys in useHotkeys Hook
+  useHotKeys({
+    canvas,
+    save,
+    redo,
+    undo,
+    copy,
+    paste,
+    moveDown,
+    moveLeft,
+    moveRight,
+    moveUp,
+  }); //paste to make shortcut keys in useHotkeys Hook
 
   //useMemo to save the state on the memory when the state change so the re-render won't effect the Memo
   const editor = useMemo(() => {
@@ -648,7 +663,7 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
         transparentCorners: false,
         borderOpacityWhenMoving: 1,
         cornerStrokeColor: "#ff5c00",
-        padding: 0,
+        padding: 15,
         cornerSize: 10,
       });
 

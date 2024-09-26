@@ -1,17 +1,26 @@
 import { fabric } from "fabric";
 import { useCallback, useRef } from "react";
-interface UseClipboardProps {
+interface UseArrowKeyProps {
   canvas: fabric.Canvas | null;
 }
-export const useClipboard = ({ canvas }: UseClipboardProps) => {
+export const useArrowKey = ({ canvas }: UseArrowKeyProps) => {
   const clipboard = useRef<any>(null);
-  const copy = useCallback(() => {
+  const moveLeft = useCallback(() => {
     canvas?.getActiveObject()?.clone((cloned: any) => {
       clipboard.current = cloned;
     });
-    console.log("canvas:", canvas?.getActiveObjects());
   }, [canvas]);
-  const paste = useCallback(() => {
+  const moveRight = useCallback(() => {
+    canvas?.getActiveObject()?.clone((cloned: any) => {
+      clipboard.current = cloned;
+    });
+  }, [canvas]);
+  const moveUp = useCallback(() => {
+    canvas?.getActiveObject()?.clone((cloned: any) => {
+      clipboard.current = cloned;
+    });
+  }, [canvas]);
+  const moveDown = useCallback(() => {
     if (!clipboard) return;
     clipboard.current.clone((clonedObj: any) => {
       canvas?.discardActiveObject();
@@ -38,5 +47,5 @@ export const useClipboard = ({ canvas }: UseClipboardProps) => {
     });
   }, [canvas]);
 
-  return { copy, paste };
+  return { moveLeft, moveRight, moveUp, moveDown };
 };
