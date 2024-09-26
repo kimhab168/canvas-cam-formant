@@ -1,8 +1,6 @@
 import { ChromePicker, CirclePicker } from "react-color";
 import { colors } from "@/features/editor/types";
 import { rgbaObjectToString } from "@/features/editor/utils";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-
 interface ColorPickerProps {
   value: string;
   onChange: (value: string) => void;
@@ -13,11 +11,11 @@ export const ColorPicker = ({
   onChange = () => {},
 }: ColorPickerProps) => {
   return (
-    <div className="w-full overflow-x-auto">
+    <div className="w-full overflow-x-scroll bg-white h-[55px] flex justify-center items-center">
       <div className="p-2" style={{ scrollBehavior: "smooth" }}>
         <CirclePicker
           circleSize={25}
-          className="circle-picker"
+          className="circle-picker "
           color={value}
           colors={colors}
           onChangeComplete={(color) => {

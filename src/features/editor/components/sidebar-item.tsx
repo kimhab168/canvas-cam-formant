@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 interface SidebarItemProps {
-  icon: LucideIcon;
+  icon: LucideIcon | React.ElementType;
   label: string;
   isActive?: boolean;
   onClick: () => void;

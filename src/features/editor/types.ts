@@ -129,7 +129,8 @@ export type ActiveTool =
   | "remove-bg"
   | "templates"
   | "format"
-  | "fontSize";
+  | "fontSize"
+  | "textcolor";
 
 export type BuildEditorProps = {
   save: (skip?: boolean) => void;

@@ -8,11 +8,10 @@ import {
   Pencil,
   Presentation,
   Settings,
-  Shapes,
   Sparkles,
   Type,
 } from "lucide-react";
-
+import Shapes from "./icons/svg components/shapes";
 interface SidebarProps {
   activeTool: ActiveTool;
   onChangeActiveTool: (tool: ActiveTool) => void;

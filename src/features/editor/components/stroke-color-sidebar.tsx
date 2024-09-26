@@ -2,15 +2,10 @@ import { cn } from "@/lib/utils";
 
 import { ActiveTool, Editor, STROKE_COLOR } from "@/features/editor/types";
 
-import { ToolSidebarHeader } from "@/features/editor/components/tool-sidebar-header";
-import { ToolSidebarClose } from "@/features/editor/components/tool-sidebar-close";
-
 import { ColorPicker } from "@/features/editor/components/color-picker";
 
-import { ScrollArea } from "@/components/ui/scroll-area";
-
 interface StrokeColorSidebarProps {
-  editor: Editor;
+  editor: Editor | undefined;
   activeTool?: ActiveTool;
   onChangeActiveTool?: (tool: ActiveTool) => void;
 }
@@ -33,22 +28,13 @@ export const StrokeColorSidebar = ({
   return (
     <aside
       className={cn(
-        "bg-white relative border-r z-[40] w-[360px] h-full flex flex-col",
+        "bg-white border-r z-[40] flex absolute justify-center w-full",
         activeTool === "stroke-color" ? "visible" : "hidden"
       )}
     >
-      {/* Header Sidebar */}
-      <ToolSidebarHeader
-        title="Stroke Color"
-        description="Add Stroke color to your element"
-      />
-      <ScrollArea>
-        <div className="p-4 space-y-6">
-          <ColorPicker value={value} onChange={onChange} />
-        </div>
-      </ScrollArea>
-      {/* Footer SideBar */}
-      <ToolSidebarClose onClick={onClose} />
+      <div className="w-full overflow-x-scroll bg-white h-[55px] flex justify-center items-center">
+        <ColorPicker value={value} onChange={onChange} />
+      </div>
     </aside>
   );
 };

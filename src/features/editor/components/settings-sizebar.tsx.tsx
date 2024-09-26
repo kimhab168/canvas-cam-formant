@@ -65,45 +65,18 @@ export const SettingsSidebar = ({
   return (
     <aside
       className={cn(
-        "bg-white relative border-r z-[40] w-[360px] h-full flex flex-col",
+        "bg-white relative border-r z-[40] flex justify-center items-center",
         activeTool === "settings" ? "visible" : "hidden"
       )}
     >
-      {/* Header Sidebar */}
-      <ToolSidebarHeader title="Settings" description="Workspace settings" />
       <ScrollArea>
-        <form className="space-y-4 p-4" onSubmit={onSubmit}>
-          <div className="space-y-2">
-            <Label>Height</Label>
-            <Input
-              placeholder="Height"
-              value={height}
-              type="number"
-              onChange={(e) => changeHeight(e.target.value)}
-            />
-          </div>
-          <div className="space-y-2">
-            <Label>Width</Label>
-            <Input
-              placeholder="Width"
-              value={width}
-              type="number"
-              onChange={(e) => changeWidth(e.target.value)}
-            />
-          </div>
-          <Button type="submit" className="w-full">
-            Resize
-          </Button>
-        </form>
-        <div className="p-4">
+        <div className="p-4 space-x-3 border-b flex overflow-x-auto">
           <ColorPicker
             value={background as string} //can use only string for color : hex,rgba as string
             onChange={changeBackground}
           />
         </div>
       </ScrollArea>
-      {/* Footer SideBar */}
-      <ToolSidebarClose onClick={onClose} />
     </aside>
   );
 };

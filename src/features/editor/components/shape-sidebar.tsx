@@ -33,13 +33,8 @@ export const ShapeSidebar = ({
         activeTool === "shapes" ? "visible" : "hidden"
       )}
     >
-      {/* Header Sidebar */}
-      {/* <ToolSidebarHeader
-        title="Shapes"
-        description="Add shapes to your canvas"
-      /> */}
       <ScrollArea>
-        <div className="p-4 space-x-3 border-b flex overflow-x-auto">
+        <div className="p-4 space-x-3 border-b flex overflow-x-hidden">
           <ShapeTool
             onClick={() => editor?.addCircle()}
             icon={FaCircle}
@@ -72,8 +67,6 @@ export const ShapeSidebar = ({
           />
         </div>
       </ScrollArea>
-      {/* Footer SideBar */}
-      {/* <ToolSidebarClose onClick={onClose} /> */}
     </aside>
   );
 };
