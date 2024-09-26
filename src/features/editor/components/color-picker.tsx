@@ -8,14 +8,16 @@ interface ColorPickerProps {
   onChange: (value: string) => void;
 }
 
-export const ColorPicker = ({ value, onChange }: ColorPickerProps) => {
+export const ColorPicker = ({
+  value = "rgba(0, 0, 0, 1)",
+  onChange = () => {},
+}: ColorPickerProps) => {
   return (
     <div className="w-full overflow-x-auto">
-      <div
-        className="whitespace-nowrap flex space-x-2 p-4"
-        style={{ scrollBehavior: "smooth" }}
-      >
+      <div className="p-2" style={{ scrollBehavior: "smooth" }}>
         <CirclePicker
+          circleSize={25}
+          className="circle-picker"
           color={value}
           colors={colors}
           onChangeComplete={(color) => {

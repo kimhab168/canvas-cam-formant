@@ -20,6 +20,8 @@ import {
   Copy,
   Trash,
 } from "lucide-react";
+import { ImFontSize } from "react-icons/im";
+
 import { RxTransparencyGrid } from "react-icons/rx";
 import { isTextType } from "@/features/editor/utils";
 import { FaBold, FaItalic, FaStrikethrough, FaUnderline } from "react-icons/fa";
@@ -226,6 +228,22 @@ export const Toolbar = ({
           </Hint>
         </div>
       )}
+      {isText && (
+        <div className="flex items-center h-full justify-center">
+          <Hint label="Font Size" side="top" sideOffset={5}>
+            <Button
+              onClick={() => onChangeActiveTool("fontSize")}
+              size="icon"
+              variant="ghost"
+              className={cn(activeTool === "fontSize" && "bg-gray-100")}
+            >
+              <ImFontSize className="size-4" />
+
+              {/* <FaBold  /> */}
+            </Button>
+          </Hint>
+        </div>
+      )}
 
       {isText && activeTool === "format" && (
         <div className="flex absolute bottom-[108px] z-[40] left-20 bg-white p-1">
@@ -281,6 +299,7 @@ export const Toolbar = ({
           </div>
         </div>
       )}
+
       {isText && (
         <div className="flex items-center h-full justify-center">
           <Hint label="Align left" side="top" sideOffset={5}>
@@ -323,14 +342,17 @@ export const Toolbar = ({
           </Hint>
         </div>
       )}
-      {isText && (
-        <div className="flex items-center h-full justify-center">
-          <FontSizeInput
-            value={properties.fontSize}
-            onChange={onChangeFontSize}
-          />
+      {isText && activeTool === "fontSize" && (
+        <div className="flex absolute bottom-[108px] z-[40] left-28 bg-white p-1">
+          <div className="flex items-center h-full justify-center">
+            <FontSizeInput
+              value={properties.fontSize}
+              onChange={onChangeFontSize}
+            />
+          </div>
         </div>
       )}
+
       {isImage && (
         <div className="flex items-center h-full justify-center">
           <Hint label="Filters" side="top" sideOffset={5}>

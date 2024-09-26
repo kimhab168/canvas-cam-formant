@@ -10,15 +10,15 @@ import { ColorPicker } from "@/features/editor/components/color-picker";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface StrokeColorSidebarProps {
-  editor: Editor | undefined;
-  activeTool: ActiveTool;
-  onChangeActiveTool: (tool: ActiveTool) => void;
+  editor: Editor;
+  activeTool?: ActiveTool;
+  onChangeActiveTool?: (tool: ActiveTool) => void;
 }
 
 export const StrokeColorSidebar = ({
   editor,
-  activeTool,
-  onChangeActiveTool,
+  activeTool = "select",
+  onChangeActiveTool = () => {},
 }: StrokeColorSidebarProps) => {
   const value = editor?.getActiveStrokeColor() || STROKE_COLOR;
 
