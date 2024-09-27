@@ -35,6 +35,9 @@ import { useWindowEvent } from "@/features/editor/hooks/use-window-events";
 import { useArrowKey } from "./use-arrowKey";
 const buildEditor = ({
   moveLeft,
+  moveRight,
+  moveUp,
+  moveDown,
   save,
   undo,
   redo,
@@ -133,6 +136,9 @@ const buildEditor = ({
 
   return {
     onMoveLeft: () => moveLeft(),
+    onMoveRight: () => moveRight(),
+    onMoveUp: () => moveUp(),
+    onMoveDown: () => moveDown(),
     saveJpg,
     savePng,
     saveJson,
@@ -612,6 +618,9 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
     if (canvas) {
       return buildEditor({
         moveLeft,
+        moveRight,
+        moveUp,
+        moveDown,
         save,
         undo,
         redo,
