@@ -26,7 +26,7 @@ export const TextColorSidebar = ({
   return (
     <aside
       className={cn(
-        "bg-white border-r z-[40] flex absolute justify-center bottom-[108px] w-full",
+        "bg-white border-r z-[40] flex absolute justify-center bottom-[108px] h-[55px] w-full",
         activeTool === "textcolor" ? "visible" : "hidden"
       )}
     >

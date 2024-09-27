@@ -11,7 +11,7 @@ export const ColorPicker = ({
   onChange = () => {},
 }: ColorPickerProps) => {
   return (
-    <div className="w-full overflow-x-scroll bg-white h-[55px] flex justify-center items-center">
+    <div className="h-full overflow-x-scroll overflow-y-hidden flex justify-center items-center">
       <div className="p-2" style={{ scrollBehavior: "smooth" }}>
         <CirclePicker
           circleSize={25}
