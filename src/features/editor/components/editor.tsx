@@ -49,6 +49,7 @@ const Editor = () => {
       //make the object out of container cannot control
       controlsAboveOverlay: true,
       preserveObjectStacking: true, // if false the selecting element will be front of all elements/objects
+      // selection: false,
     });
     init({ initialCanvas: canvas, initialContainer: containerRef.current! });
 
