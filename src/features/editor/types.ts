@@ -130,9 +130,11 @@ export type ActiveTool =
   | "templates"
   | "format"
   | "fontSize"
-  | "textcolor";
+  | "textcolor"
+  | "nudge";
 
 export type BuildEditorProps = {
+  moveLeft: () => void;
   save: (skip?: boolean) => void;
   undo: () => void;
   redo: () => void;
@@ -156,6 +158,7 @@ export type BuildEditorProps = {
 };
 
 export interface Editor {
+  onMoveLeft: () => void;
   savePng: () => void;
   saveJpg: () => void;
   saveSvg: () => void;

@@ -17,7 +17,6 @@ export const useArrowKey = ({ canvas, step = 5 }: UseArrowKeyProps) => {
   //move
   const moveSelected = (direction: direction) => {
     const activeObject = canvas?.getActiveObject();
-    const activeGroup = canvas?.getActiveObjects();
     if (activeObject) {
       const current = {
         left: activeObject.left as number,
@@ -47,7 +46,7 @@ export const useArrowKey = ({ canvas, step = 5 }: UseArrowKeyProps) => {
   //
   const clipboard = useRef<any>(null);
   const moveLeft = useCallback(() => {
-    console.log("left clicked");
+    // console.log("left clicked");
     moveSelected("left");
   }, [canvas]);
   const moveRight = useCallback(() => {

@@ -34,6 +34,7 @@ import { useHotKeys } from "@/features/editor/hooks/use-hotkeys";
 import { useWindowEvent } from "@/features/editor/hooks/use-window-events";
 import { useArrowKey } from "./use-arrowKey";
 const buildEditor = ({
+  moveLeft,
   save,
   undo,
   redo,
@@ -131,6 +132,7 @@ const buildEditor = ({
   };
 
   return {
+    onMoveLeft: () => moveLeft(),
     saveJpg,
     savePng,
     saveJson,
@@ -609,6 +611,7 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
   const editor = useMemo(() => {
     if (canvas) {
       return buildEditor({
+        moveLeft,
         save,
         undo,
         redo,
@@ -633,6 +636,7 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
     }
     return undefined;
   }, [
+    moveLeft,
     canRedo,
     canUndo,
     redo,

@@ -30,6 +30,8 @@ import FormatBold from "./icons/svg components/formatBold";
 import FontSize from "./icons/svg components/FontSize";
 import FontIcon from "./icons/svg components/FontIcon";
 import TextColor from "./icons/svg components/textColor";
+import { NudgePosition } from "./move-nudge";
+import NudgeIcon from "./icons/svg components/nudge";
 //TODO: add picker moving work
 interface ToolbarProps {
   editor: Editor | undefined;
@@ -257,6 +259,20 @@ export const Toolbar = ({
           </Hint>
         </div>
       )}
+      {isText && (
+        <div className="flex items-center h-full justify-center">
+          <Hint label="nudge" side="top" sideOffset={5}>
+            <Button
+              onClick={() => onChangeActiveTool("nudge")}
+              size="icon"
+              variant="ghost"
+              className={cn(activeTool === "nudge" && "bg-gray-100")}
+            >
+              <NudgeIcon width={28} height={28} />
+            </Button>
+          </Hint>
+        </div>
+      )}
 
       {isText && activeTool === "format" && (
         <div className="flex absolute bottom-[108px] z-[40] left-20 bg-white p-1">
@@ -361,6 +377,17 @@ export const Toolbar = ({
             <FontSizeInput
               value={properties.fontSize}
               onChange={onChangeFontSize}
+            />
+          </div>
+        </div>
+      )}
+      {isText && activeTool === "nudge" && (
+        <div className="flex absolute bottom-[108px] z-[40] left-28 bg-white p-1">
+          <div className="flex items-center h-full justify-center">
+            <NudgePosition
+              value={properties.fontSize}
+              onChange={onChangeFontSize}
+              editor={editor}
             />
           </div>
         </div>
