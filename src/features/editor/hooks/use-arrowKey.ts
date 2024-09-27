@@ -2,49 +2,62 @@ import { fabric } from "fabric";
 import { useCallback, useRef } from "react";
 interface UseArrowKeyProps {
   canvas: fabric.Canvas | null;
+  step: number;
 }
-export const useArrowKey = ({ canvas }: UseArrowKeyProps) => {
+
+type direction = "left" | "right" | "up" | "down";
+let Direction = {
+  LEFT: "left",
+  UP: "up",
+  RIGHT: "right",
+  DOWN: "down",
+};
+
+export const useArrowKey = ({ canvas, step = 5 }: UseArrowKeyProps) => {
+  //move
+  const moveSelected = (direction: direction) => {
+    const activeObject = canvas?.getActiveObject();
+    const activeGroup = canvas?.getActiveObjects();
+    if (activeObject) {
+      const current = {
+        left: activeObject.left as number,
+        top: activeObject.top as number,
+      };
+      switch (direction) {
+        case Direction.LEFT:
+          activeObject.set({ left: current.left - step });
+          // console.log(activeObject);
+          canvas?.renderAll();
+          break;
+        case Direction.RIGHT:
+          activeObject.set({ left: current.left + step });
+          canvas?.renderAll();
+          break;
+        case Direction.UP:
+          activeObject.set({ top: current.top - step });
+          canvas?.renderAll();
+          break;
+        case Direction.DOWN:
+          activeObject.set({ top: current.top + step });
+          canvas?.renderAll();
+          break;
+      }
+    }
+  };
+  //
   const clipboard = useRef<any>(null);
   const moveLeft = useCallback(() => {
-    canvas?.getActiveObject()?.clone((cloned: any) => {
-      clipboard.current = cloned;
-    });
+    console.log("left clicked");
+    moveSelected("left");
   }, [canvas]);
   const moveRight = useCallback(() => {
-    canvas?.getActiveObject()?.clone((cloned: any) => {
-      clipboard.current = cloned;
-    });
+    moveSelected("right");
   }, [canvas]);
   const moveUp = useCallback(() => {
-    canvas?.getActiveObject()?.clone((cloned: any) => {
-      clipboard.current = cloned;
-    });
+    moveSelected("up");
   }, [canvas]);
   const moveDown = useCallback(() => {
-    if (!clipboard) return;
-    clipboard.current.clone((clonedObj: any) => {
-      canvas?.discardActiveObject();
-      //new object added to other position ot make it easy to see that new obj has been added
-      clonedObj.set({
-        left: clonedObj.left + 10,
-        top: clonedObj.top + 10,
-        evented: true,
-      });
-
-      if (clonedObj.type === "activeSelection") {
-        clonedObj.canvas = canvas;
-        clonedObj.forEachObject((object: any) => {
-          canvas?.add(object);
-        });
-        clonedObj.setCoords();
-      } else {
-        canvas?.add(clonedObj);
-      }
-      clipboard.current.top += 10;
-      clipboard.current.left += 10;
-      canvas?.setActiveObject(clonedObj); //set active object to new cloned object
-      canvas?.requestRenderAll();
-    });
+    moveSelected("down");
   }, [canvas]);
 
   return { moveLeft, moveRight, moveUp, moveDown };

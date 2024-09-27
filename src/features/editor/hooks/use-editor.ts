@@ -578,7 +578,10 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
   //clipboard hook (copy & paste features)
   const { copy, paste } = useClipboard({ canvas });
 
-  const { moveLeft, moveDown, moveRight, moveUp } = useArrowKey({ canvas }); //TODO:
+  const { moveLeft, moveDown, moveRight, moveUp } = useArrowKey({
+    canvas,
+    step: 10,
+  }); //TODO:
 
   const { autoZoom } = useAutoResize({ canvas, container });
 
