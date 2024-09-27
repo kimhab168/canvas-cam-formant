@@ -32,6 +32,7 @@ import { useClipboard } from "@/features/editor/hooks/use-clipboard";
 import { useHistory } from "@/features/editor/hooks/use-history";
 import { useHotKeys } from "@/features/editor/hooks/use-hotkeys";
 import { useWindowEvent } from "@/features/editor/hooks/use-window-events";
+
 const buildEditor = ({
   save,
   undo,
@@ -667,6 +668,7 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
       initialCanvas.add(initialWorkspace);
       initialCanvas.centerObject(initialWorkspace);
       initialCanvas.clipPath = initialWorkspace;
+      addZoomAndPan(initialCanvas);
 
       setCanvas(initialCanvas);
       setContainer(initialContainer);
@@ -680,3 +682,113 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
 
   return { init, editor };
 };
+
+
+function addZoomAndPan(canvas: fabric.Canvas) {
+  const MIN_ZOOM = 0.5; // Minimum zoom level
+  const MAX_ZOOM = 2;   // Maximum zoom level
+
+  // Zoom with mouse wheel
+  canvas.on('mouse:wheel', function (opt) {
+    const delta = opt.e.deltaY;
+    let zoom = canvas.getZoom();
+    zoom *= 0.999 ** delta;
+    if (zoom > MAX_ZOOM) zoom = MAX_ZOOM;
+    if (zoom < MIN_ZOOM) zoom = MIN_ZOOM;
+
+    const zoomPoint = new fabric.Point(opt.e.offsetX, opt.e.offsetY);
+    canvas.zoomToPoint(zoomPoint, zoom);
+    opt.e.preventDefault();
+    opt.e.stopPropagation();
+
+    const vpt = canvas.viewportTransform!;
+    const canvasCenter = new fabric.Point(canvas.getWidth() / 2, canvas.getHeight() / 2);
+    //@ts-ignore
+    const zoomCenter = fabric.util.transformPoint(canvasCenter, canvas.viewportTransform);
+
+    vpt[4] += canvasCenter.x - zoomCenter.x;
+    vpt[5] += canvasCenter.y - zoomCenter.y;
+
+    if (zoom < 400 / 1000) {
+      vpt[4] = 200 - 1000 * zoom / 2;
+      vpt[5] = 200 - 1000 * zoom / 2;
+    } else {
+      if (vpt[4] >= 0) {
+        vpt[4] = 0;
+      } else if (vpt[4] < canvas.getWidth() - 1000 * zoom) {
+        vpt[4] = canvas.getWidth() - 1000 * zoom;
+      }
+      if (vpt[5] >= 0) {
+        vpt[5] = 0;
+      } else if (vpt[5] < canvas.getHeight() - 1000 * zoom) {
+        vpt[5] = canvas.getHeight() - 1000 * zoom;
+      }
+    }
+
+    // Re-center the canvas
+    canvas.getObjects().forEach(obj => {
+      canvas.centerObject(obj);
+    });
+
+    canvas.requestRenderAll();
+  });
+
+  // Pan with mouse drag or touch
+  let isDragging = false;
+  let lastPosX = 0;
+  let lastPosY = 0;
+
+  canvas.on('mouse:down', function (opt) {
+    const evt = opt.e;
+    isDragging = true;
+    canvas.selection = false;
+    lastPosX = evt.clientX;
+    lastPosY = evt.clientY;
+  });
+
+  canvas.on('mouse:move', function (opt) {
+    if (isDragging) {
+      const e = opt.e;
+      const vpt = canvas.viewportTransform!;
+      vpt[4] += e.clientX - lastPosX;
+      vpt[5] += e.clientY - lastPosY;
+      canvas.requestRenderAll();
+      lastPosX = e.clientX;
+      lastPosY = e.clientY;
+    }
+  });
+
+  canvas.on('mouse:up', function (opt) {
+    isDragging = false;
+    canvas.selection = true;
+  });
+
+  // Touch events for mobile panning
+  canvas.on('touch:gesture', function (opt) {
+    //@ts-ignore
+    if (opt.e.touches && opt.e.touches.length === 1) {
+      //@ts-ignore
+      const touch = opt.e.touches[0];
+      isDragging = true;
+      lastPosX = touch.clientX;
+      lastPosY = touch.clientY;
+    }
+  });
+
+  canvas.on('touch:drag', function (opt) {
+    if (isDragging) {
+      //@ts-ignore
+      const touch = opt.e.touches[0];
+      const vpt = canvas.viewportTransform!;
+      vpt[4] += touch.clientX - lastPosX;
+      vpt[5] += touch.clientY - lastPosY;
+      canvas.requestRenderAll();
+      lastPosX = touch.clientX;
+      lastPosY = touch.clientY;
+    }
+  });
+
+  canvas.on('touch:end', function (opt) {
+    isDragging = false;
+  });
+}

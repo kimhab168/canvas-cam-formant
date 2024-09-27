@@ -10,41 +10,41 @@ import { ColorPicker } from "@/features/editor/components/color-picker";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface FillColorSidebarProps {
-  editor: Editor | undefined;
-  activeTool: ActiveTool;
-  onChangeActiveTool: (tool: ActiveTool) => void;
+    editor: Editor | undefined;
+    activeTool: ActiveTool;
+    onChangeActiveTool: (tool: ActiveTool) => void;
 }
 
 export const FillColorSidebar = ({
-  editor,
-  activeTool,
-  onChangeActiveTool,
+    editor,
+    activeTool,
+    onChangeActiveTool,
 }: FillColorSidebarProps) => {
-  const value = editor?.getActiveFillColor() || FILL_COLOR;
+    const value = editor?.getActiveFillColor() || FILL_COLOR;
 
-  const onClose = () => {
-    onChangeActiveTool("select");
-  };
+    const onClose = () => {
+        onChangeActiveTool("select");
+    };
 
-  const onChange = (value: string) => {
-    editor?.changeFillColor(value);
-  };
+    const onChange = (value: string) => {
+        editor?.changeFillColor(value);
+    };
 
-  return (
-    <aside
-      className={cn(
-        "bg-red-200 border-r z-[40] flex absolute justify-center bottom-[108px] w-full",
-        activeTool === "fill" ? "visible" : "hidden"
-      )}
-    >
-      {/* Header Sidebar */}
-      {/* <ToolSidebarHeader
+    return (
+        <aside
+            className={cn(
+                "bg-red-200 border-r z-[40] flex absolute justify-center bottom-[108px] w-full",
+                activeTool === "fill" ? "visible" : "hidden"
+            )}
+        >
+            {/* Header Sidebar */}
+            {/* <ToolSidebarHeader
         title="Fill Color"
         description="Add fill color to your element"
       /> */}
-      <ColorPicker value={value} onChange={onChange} />
-      {/* Footer SideBar */}
-      {/* <ToolSidebarClose onClick={onClose} /> */}
-    </aside>
-  );
+            <ColorPicker value={value} onChange={onChange} />
+            {/* Footer SideBar */}
+            {/* <ToolSidebarClose onClick={onClose} /> */}
+        </aside>
+    );
 };
