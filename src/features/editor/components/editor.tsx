@@ -17,6 +17,7 @@ import { FontSidebar } from "@/features/editor/components/font-sidebar";
 import { ImagesSidebar } from "@/features/editor/components/images-sidebar";
 import { FilterSidebar } from "@/features/editor/components/filter-sidebar";
 import { SettingsSidebar } from "@/features/editor/components/settings-sizebar.tsx";
+import { TextColorSidebar } from "./text-color-sidebar";
 const Editor = () => {
   //set default active on select feature
   const [activeTool, setActiveTool] = useState<ActiveTool>("select");
@@ -25,13 +26,6 @@ const Editor = () => {
       if (tool === activeTool) {
         return setActiveTool("select");
       }
-      //if need use it
-      // if (tool === "draw") {
-      //   Enable Draw Mode
-      // }
-      // if (activeTool === "draw") {
-      //   Disable Draw Mode
-      // }
       setActiveTool(tool);
     },
     [activeTool] //get back activeTool callback to this global/editor state from child
@@ -91,50 +85,20 @@ const Editor = () => {
             activeTool={activeTool}
             onChangeActiveTool={onChangeActiveTool}
           />
+          <SettingsSidebar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+          />
         </div>
       </div>
 
       <div className="h-[calc(100%-68px-80px)] flex">
-        {/* <Sidebar
-          activeTool={activeTool}
-          onChangeActiveTool={onChangeActiveTool}
-        /> */}
-        {/* Side bar */}
-        {/* <ShapeSidebar
-          editor={editor}
-          activeTool={activeTool}
-          onChangeActiveTool={onChangeActiveTool}
-        /> */}
-        {/* <FillColorSidebar
-          editor={editor}
-          activeTool={activeTool}
-          onChangeActiveTool={onChangeActiveTool}
-        /> */}
-        <StrokeColorSidebar
-          editor={editor}
-          activeTool={activeTool}
-          onChangeActiveTool={onChangeActiveTool}
-        />
-        <StrokeWidthSidebar
-          editor={editor}
-          activeTool={activeTool}
-          onChangeActiveTool={onChangeActiveTool}
-        />
         <OpacitySidebar
           editor={editor}
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
         />
-        {/* <TextSidebar
-          editor={editor}
-          activeTool={activeTool}
-          onChangeActiveTool={onChangeActiveTool}
-        /> */}
-        {/* <FontSidebar
-          editor={editor}
-          activeTool={activeTool}
-          onChangeActiveTool={onChangeActiveTool}
-        /> */}
         <ImagesSidebar
           editor={editor}
           activeTool={activeTool}
@@ -145,12 +109,8 @@ const Editor = () => {
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
         />
-        <SettingsSidebar
-          editor={editor}
-          activeTool={activeTool}
-          onChangeActiveTool={onChangeActiveTool}
-        />
-        {/* End of Side bar */}
+
+        {/* Canvas */}
         <main className="bg-muted flex-1 overflow-x-auto flex flex-col relative">
           <div
             className="flex-1 h-[calc(100%-124px)] bg-muted"
@@ -158,6 +118,16 @@ const Editor = () => {
           >
             <canvas ref={canvasRef} />
           </div>
+          <StrokeColorSidebar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+          />
+          <StrokeWidthSidebar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+          />
           <Toolbar
             editor={editor}
             activeTool={activeTool}
@@ -165,6 +135,11 @@ const Editor = () => {
             key={JSON.stringify(editor?.canvas.getActiveObject())}
           />
           <FillColorSidebar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+          />
+          <TextColorSidebar
             editor={editor}
             activeTool={activeTool}
             onChangeActiveTool={onChangeActiveTool}

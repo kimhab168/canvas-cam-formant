@@ -49,7 +49,7 @@ export const ImagesSidebar = ({
             button: "Upload Image",
           }}
           endpoint="imageUploader"
-          onClientUploadComplete={(res) => {
+          onClientUploadComplete={(res: any) => {
             editor?.addImage(res[0].url);
           }}
         />

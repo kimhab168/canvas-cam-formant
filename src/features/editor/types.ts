@@ -128,9 +128,16 @@ export type ActiveTool =
   | "ai"
   | "remove-bg"
   | "templates"
-  | "format";
+  | "format"
+  | "fontSize"
+  | "textcolor"
+  | "nudge";
 
 export type BuildEditorProps = {
+  moveLeft: () => void;
+  moveRight: () => void;
+  moveUp: () => void;
+  moveDown: () => void;
   save: (skip?: boolean) => void;
   undo: () => void;
   redo: () => void;
@@ -154,6 +161,10 @@ export type BuildEditorProps = {
 };
 
 export interface Editor {
+  onMoveLeft: () => void;
+  onMoveRight: () => void;
+  onMoveUp: () => void;
+  onMoveDown: () => void;
   savePng: () => void;
   saveJpg: () => void;
   saveSvg: () => void;

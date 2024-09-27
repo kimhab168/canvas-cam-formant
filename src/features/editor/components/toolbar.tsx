@@ -20,10 +20,18 @@ import {
   Copy,
   Trash,
 } from "lucide-react";
+import { ImFontSize } from "react-icons/im";
+
 import { RxTransparencyGrid } from "react-icons/rx";
 import { isTextType } from "@/features/editor/utils";
 import { FaBold, FaItalic, FaStrikethrough, FaUnderline } from "react-icons/fa";
 import { FontSizeInput } from "@/features/editor/components/font-size-input";
+import FormatBold from "./icons/svg components/formatBold";
+import FontSize from "./icons/svg components/FontSize";
+import FontIcon from "./icons/svg components/FontIcon";
+import TextColor from "./icons/svg components/textColor";
+import { NudgePosition } from "./move-nudge";
+import NudgeIcon from "./icons/svg components/nudge";
 //TODO: add picker moving work
 interface ToolbarProps {
   editor: Editor | undefined;
@@ -40,6 +48,7 @@ export const Toolbar = ({
   const selectedObjectType = editor?.selectedObjects[0]?.type;
   const isText = isTextType(selectedObjectType);
   const isImage = selectedObjectType === "image";
+  const isShape = selectedObjectType === "shape";
 
   const initialFillColor = editor?.getActiveFillColor();
   const initialStrokeColor = editor?.getActiveStrokeColor();
@@ -139,7 +148,7 @@ export const Toolbar = ({
   }
   return (
     <div className="shrink-0 h-[56px] border-b bg-white w-full flex items-center overflow-x-auto z-[49] p-2 gap-x-2">
-      {!isImage && (
+      {!isImage && !isText && (
         <div className="flex items-center h-full justify-center ">
           <Hint label="Color" side="top" sideOffset={5}>
             <Button
@@ -149,11 +158,25 @@ export const Toolbar = ({
               className={cn(activeTool === "fill" && "bg-gray-100")}
             >
               <div
-                className="rounded-lg size-4 border"
+                className="rounded-md size-5 border"
                 style={{
                   backgroundColor: properties.fillColor,
                 }}
               />
+            </Button>
+          </Hint>
+        </div>
+      )}
+      {isText && (
+        <div className="flex items-center h-full justify-center ">
+          <Hint label="Text Color" side="top" sideOffset={5}>
+            <Button
+              onClick={() => onChangeActiveTool("textcolor")}
+              size="icon"
+              variant="ghost"
+              className={cn(activeTool === "textcolor" && "bg-gray-100")}
+            >
+              <TextColor width={32} height={32} />
             </Button>
           </Hint>
         </div>
@@ -191,23 +214,17 @@ export const Toolbar = ({
           </Hint>
         </div>
       )}
+
       {isText && (
         <div className="flex items-center h-full justify-center">
-          <Hint label="Font family" side="top" sideOffset={5}>
+          <Hint label="Font" side="top" sideOffset={5}>
             <Button
               onClick={() => onChangeActiveTool("font")}
               size="icon"
               variant="ghost"
-              className={cn(
-                "w-auto px-2 text-sm",
-                activeTool === "font" && "bg-gray-100"
-              )}
+              className={cn(activeTool === "font" && "bg-gray-100")}
             >
-              <div className="max-w-[50px] truncate">
-                {properties.fontFamily}
-              </div>
-              {/* //TODO: add */}
-              <ChevronDown className="size-4 ml-2 shrink-0" />
+              <FontIcon height={30} width={30} />
             </Button>
           </Hint>
         </div>
@@ -221,7 +238,37 @@ export const Toolbar = ({
               variant="ghost"
               className={cn(activeTool === "format" && "bg-gray-100")}
             >
-              <FaBold className="size-4" />
+              <FormatBold height={32} width={32} />
+            </Button>
+          </Hint>
+        </div>
+      )}
+      {isText && (
+        <div className="flex items-center h-full justify-center">
+          <Hint label="Font Size" side="top" sideOffset={5}>
+            <Button
+              onClick={() => onChangeActiveTool("fontSize")}
+              size="icon"
+              variant="ghost"
+              className={cn(activeTool === "fontSize" && "bg-gray-100")}
+            >
+              <FontSize width={32} height={32} />
+
+              {/* <FaBold  /> */}
+            </Button>
+          </Hint>
+        </div>
+      )}
+      {isText && (
+        <div className="flex items-center h-full justify-center">
+          <Hint label="nudge" side="top" sideOffset={5}>
+            <Button
+              onClick={() => onChangeActiveTool("nudge")}
+              size="icon"
+              variant="ghost"
+              className={cn(activeTool === "nudge" && "bg-gray-100")}
+            >
+              <NudgeIcon width={28} height={28} />
             </Button>
           </Hint>
         </div>
@@ -281,6 +328,7 @@ export const Toolbar = ({
           </div>
         </div>
       )}
+
       {isText && (
         <div className="flex items-center h-full justify-center">
           <Hint label="Align left" side="top" sideOffset={5}>
@@ -323,14 +371,28 @@ export const Toolbar = ({
           </Hint>
         </div>
       )}
-      {isText && (
-        <div className="flex items-center h-full justify-center">
-          <FontSizeInput
-            value={properties.fontSize}
-            onChange={onChangeFontSize}
-          />
+      {isText && activeTool === "fontSize" && (
+        <div className="flex absolute bottom-[108px] z-[40] left-28 bg-white p-1">
+          <div className="flex items-center h-full justify-center">
+            <FontSizeInput
+              value={properties.fontSize}
+              onChange={onChangeFontSize}
+            />
+          </div>
         </div>
       )}
+      {isText && activeTool === "nudge" && (
+        <div className="flex absolute bottom-[108px] z-[40] left-28 bg-white p-1">
+          <div className="flex items-center h-full justify-center">
+            <NudgePosition
+              value={properties.fontSize}
+              onChange={onChangeFontSize}
+              editor={editor}
+            />
+          </div>
+        </div>
+      )}
+
       {isImage && (
         <div className="flex items-center h-full justify-center">
           <Hint label="Filters" side="top" sideOffset={5}>

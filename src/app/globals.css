@@ -72,19 +72,13 @@ body {
 }
 
 .circle-picker {
-    width: 20px !important;
-    height: 200px !important;
+    width: auto !important;
     flex-wrap: nowrap !important;
 }
 
 .chrome-picker {
-    /* width: auto !important; */
-    /* box-shadow: none !important; */
-    /* border-radius: 0.5rem !important; */
-    /* overflow: hidden !important;
-    background-color: aqua !important; */
-}
-
-.circle-picker[title="#9C27B0"] {
-    background: #9c27b0 !important; /* Active color background */
+    width: auto !important;
+    box-shadow: none !important;
+    border-radius: 0.5rem !important;
+    overflow: hidden !important;
 }

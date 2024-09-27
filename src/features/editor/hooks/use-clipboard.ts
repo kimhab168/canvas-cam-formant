@@ -9,6 +9,7 @@ export const useClipboard = ({ canvas }: UseClipboardProps) => {
     canvas?.getActiveObject()?.clone((cloned: any) => {
       clipboard.current = cloned;
     });
+    console.log("canvas:", canvas?.getActiveObjects());
   }, [canvas]);
   const paste = useCallback(() => {
     if (!clipboard) return;
