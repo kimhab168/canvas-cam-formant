@@ -62,26 +62,26 @@ export const UseCanvasEvents = ({
         opt.e.preventDefault();
       });
 
-      canvas.on("touch:gesture", function (event) {
-        //@ts-ignore
-        const touch = event.touches;
-        if (touch.length === 2) {
-          let touch1 = touch[0];
-          let touch2 = touch[1];
-          if (
-            touch2.pageX - touch1.pageX > 0 ||
-            touch2.pageY - touch1.pageY > 0
-          ) {
-            let zoomRatio = canvas.getZoom();
-            zoomRatio += 0.1;
-            const center = canvas.getCenter();
-            canvas.zoomToPoint(
-              new fabric.Point(center.left, center.top),
-              zoomRatio
-            );
-          }
-        }
-      });
+      // canvas.on("touch:gesture", function (event) {
+      //   //@ts-ignore
+      //   const touch = event.touches;
+      //   if (touch.length === 2) {
+      //     let touch1 = touch[0];
+      //     let touch2 = touch[1];
+      //     if (
+      //       touch2.pageX - touch1.pageX > 0 ||
+      //       touch2.pageY - touch1.pageY > 0
+      //     ) {
+      //       let zoomRatio = canvas.getZoom();
+      //       zoomRatio += 0.1;
+      //       const center = canvas.getCenter();
+      //       canvas.zoomToPoint(
+      //         new fabric.Point(center.left, center.top),
+      //         zoomRatio
+      //       );
+      //     }
+      //   }
+      // });
     }
     return () => {
       if (canvas) {
