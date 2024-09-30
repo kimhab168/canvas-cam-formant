@@ -1,5 +1,4 @@
 import { fabric } from "fabric";
-import { MoveLeft } from "lucide-react";
 import { useEvent } from "react-use"; //event listener hook
 interface UseHotKeysProps {
   canvas: fabric.Canvas | null;

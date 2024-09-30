@@ -1,5 +1,4 @@
 import { fabric } from "fabric";
-import { ZoomIn } from "lucide-react";
 import { useEffect } from "react";
 
 interface UseCanvasEventsProps {
@@ -20,16 +19,14 @@ export const UseCanvasEvents = ({
       canvas.on("object:added", () => save());
       canvas.on("object:removed", () => save());
       canvas.on("object:modified", () => save());
-      canvas.on("selection:created", (e) => {
-        // console.log("selection created");
+      canvas.on("selection:created", (e) =>
+        setSelectedObjects(e.selected || [])
+      );
 
-        setSelectedObjects(e.selected || []);
-      });
+      canvas.on("selection:updated", (e) =>
+        setSelectedObjects(e.selected || [])
+      );
 
-      canvas.on("selection:updated", (e) => {
-        // console.log("selection updated");
-        setSelectedObjects(e.selected || []);
-      });
       //clear selected
       canvas.on("selection:cleared", () => {
         // console.log("selection cleared");
@@ -44,7 +41,7 @@ export const UseCanvasEvents = ({
           const center = canvas.getCenter();
           canvas.zoomToPoint(
             new fabric.Point(center.left, center.top),
-            zoomRatio < 0.2 ? 0.2 : zoomRatio
+            zoomRatio < 0.4 ? 0.4 : zoomRatio
           );
         } else {
           console.log("Scrolling up zoomin");
@@ -53,7 +50,7 @@ export const UseCanvasEvents = ({
           const center = canvas.getCenter();
           canvas.zoomToPoint(
             new fabric.Point(center.left, center.top),
-            zoomRatio
+            zoomRatio > 2 ? 2 : zoomRatio
           );
           // canvas.requestRenderAll();
         }
@@ -92,6 +89,9 @@ export const UseCanvasEvents = ({
         canvas.off("selection:updated");
         canvas.off("selection:cleared");
         canvas.off("mouse:wheel");
+        canvas.off("touch:gesture");
+        canvas.off("touch:drag");
+        canvas.off("touch:end");
       }
     };
   }, [canvas, clearSelectionCallback]);
