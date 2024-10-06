@@ -82,3 +82,29 @@ body {
     border-radius: 0.5rem !important;
     overflow: hidden !important;
 }
+
+.layers-list {
+    width: 200px;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.layers-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.layers-list li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.layers-list li:hover {
+    background-color: #e6e6e6;
+}
+
+.layers-list h3 {
+    text-align: center;
+    margin: 10px 0;
+}
