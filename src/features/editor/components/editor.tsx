@@ -46,7 +46,7 @@ const Editor = () => {
 
   useEffect(() => {
     const canvas = new fabric.Canvas(canvasRef.current, {
-      //make the object out of container cannot control
+      //make the object out of container cannot control when false
       controlsAboveOverlay: true,
       preserveObjectStacking: true, // if false the selecting element will be front of all elements/objects
       // selection: false,

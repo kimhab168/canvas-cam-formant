@@ -114,6 +114,7 @@ export const colors = [
 
 export type ActiveTool =
   | "select"
+  | "hand"
   | "shapes"
   | "text"
   | "images"

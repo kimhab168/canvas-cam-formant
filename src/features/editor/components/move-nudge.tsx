@@ -47,11 +47,11 @@ export const NudgePosition = ({
         <SlArrowLeft width={25} height={25} />
       </Button>
 
-      <Button onClick={up} variant="outline" className="p-2 " size="icon">
-        <SlArrowUp width={25} height={25} />
-      </Button>
       <Button onClick={down} variant="outline" className="p-2 " size="icon">
         <SlArrowDown width={25} height={25} />
+      </Button>
+      <Button onClick={up} variant="outline" className="p-2 " size="icon">
+        <SlArrowUp width={25} height={25} />
       </Button>
       <Button onClick={right} variant="outline" className="p-2 " size="icon">
         <SlArrowRight width={25} height={25} />

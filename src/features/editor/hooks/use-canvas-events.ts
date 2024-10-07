@@ -33,6 +33,11 @@ export const UseCanvasEvents = ({
         setSelectedObjects([]);
         clearSelectionCallback?.();
       });
+
+      // canvas.getElement().addEventListener("touchstart", (e) => {
+      //   console.log("Hello touch start");
+      // });
+
       canvas.on("mouse:wheel", function (opt) {
         if (opt.e.deltaY > 0) {
           console.log("Scrolling down zoomout");
@@ -58,27 +63,6 @@ export const UseCanvasEvents = ({
         // You can also prevent default scrolling behavior if needed
         opt.e.preventDefault();
       });
-
-      // canvas.on("touch:gesture", function (event) {
-      //   //@ts-ignore
-      //   const touch = event.touches;
-      //   if (touch.length === 2) {
-      //     let touch1 = touch[0];
-      //     let touch2 = touch[1];
-      //     if (
-      //       touch2.pageX - touch1.pageX > 0 ||
-      //       touch2.pageY - touch1.pageY > 0
-      //     ) {
-      //       let zoomRatio = canvas.getZoom();
-      //       zoomRatio += 0.1;
-      //       const center = canvas.getCenter();
-      //       canvas.zoomToPoint(
-      //         new fabric.Point(center.left, center.top),
-      //         zoomRatio
-      //       );
-      //     }
-      //   }
-      // });
     }
     return () => {
       if (canvas) {
@@ -89,9 +73,9 @@ export const UseCanvasEvents = ({
         canvas.off("selection:updated");
         canvas.off("selection:cleared");
         canvas.off("mouse:wheel");
-        canvas.off("touch:gesture");
-        canvas.off("touch:drag");
-        canvas.off("touch:end");
+        // canvas.off("touchstart");
+        // canvas.off("touch:drag");
+        // canvas.off("touch:end");
       }
     };
   }, [canvas, clearSelectionCallback]);
