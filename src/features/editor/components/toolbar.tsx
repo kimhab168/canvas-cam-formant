@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ActiveTool,
   Editor,
@@ -77,6 +77,8 @@ export const Toolbar = ({
       return;
     }
     editor?.changeFontSize(value);
+    console.log(selectedObject);
+
     setProperties((current) => ({ ...current, fontSize: value }));
   };
 
@@ -259,7 +261,7 @@ export const Toolbar = ({
           </Hint>
         </div>
       )}
-      {isText && (
+      {
         <div className="flex items-center h-full justify-center">
           <Hint label="nudge" side="top" sideOffset={5}>
             <Button
@@ -272,7 +274,7 @@ export const Toolbar = ({
             </Button>
           </Hint>
         </div>
-      )}
+      }
 
       {isText && activeTool === "format" && (
         <div className="flex absolute bottom-[108px] z-[40] left-20 bg-white p-1">
@@ -381,7 +383,7 @@ export const Toolbar = ({
           </div>
         </div>
       )}
-      {isText && activeTool === "nudge" && (
+      {activeTool === "nudge" && (
         <div className="flex absolute bottom-[108px] z-[40] left-28 bg-white p-1">
           <div className="flex items-center h-full justify-center">
             <NudgePosition

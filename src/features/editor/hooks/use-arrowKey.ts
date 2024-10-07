@@ -2,7 +2,7 @@ import { fabric } from "fabric";
 import { useCallback, useRef } from "react";
 interface UseArrowKeyProps {
   canvas: fabric.Canvas | null;
-  step: number;
+  step?: number;
 }
 
 type direction = "left" | "right" | "up" | "down";
@@ -44,9 +44,7 @@ export const useArrowKey = ({ canvas, step = 5 }: UseArrowKeyProps) => {
     }
   };
   //
-  const clipboard = useRef<any>(null);
   const moveLeft = useCallback(() => {
-    // console.log("left clicked");
     moveSelected("left");
   }, [canvas]);
   const moveRight = useCallback(() => {

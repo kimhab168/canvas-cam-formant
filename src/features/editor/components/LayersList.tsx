@@ -3,6 +3,7 @@ import { fabric } from "fabric";
 
 // Define the type for the LayersList props
 interface LayersListProps {
+    id: string;
     canvas: fabric.Canvas | null; // The canvas prop can be a Fabric.js Canvas instance or null
 }
 

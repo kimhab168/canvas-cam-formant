@@ -3,6 +3,12 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { Editor } from "../types";
+import {
+  SlArrowDown,
+  SlArrowLeft,
+  SlArrowRight,
+  SlArrowUp,
+} from "react-icons/sl";
 
 interface NudgePositionProps {
   value: number;
@@ -28,56 +34,37 @@ export const NudgePosition = ({
   };
 
   return (
-    <div className="flex items-center">
+    <div className="flex items-center gap-2">
       {/* <Button
         onClick={left}
         variant="outline"
-        className="p-2 rounded-r-none border-r-0"
+        className="p-2 "
         size="icon"
       >
         <Minus className="size-4" />
       </Button> */}
-      <Button
-        onClick={left}
-        variant="outline"
-        className="p-2 rounded-r-none border-r-0"
-        size="icon"
-      >
-        left
+      <Button onClick={left} variant="outline" className="p-2 " size="icon">
+        <SlArrowLeft width={25} height={25} />
       </Button>
-      <Button
-        onClick={right}
-        variant="outline"
-        className="p-2 rounded-r-none border-r-0"
-        size="icon"
-      >
-        right
+
+      <Button onClick={down} variant="outline" className="p-2 " size="icon">
+        <SlArrowDown width={25} height={25} />
       </Button>
-      <Button
-        onClick={up}
-        variant="outline"
-        className="p-2 rounded-r-none border-r-0"
-        size="icon"
-      >
-        Up
+      <Button onClick={up} variant="outline" className="p-2 " size="icon">
+        <SlArrowUp width={25} height={25} />
       </Button>
-      <Button
-        onClick={down}
-        variant="outline"
-        className="p-2 rounded-r-none border-r-0"
-        size="icon"
-      >
-        down
+      <Button onClick={right} variant="outline" className="p-2 " size="icon">
+        <SlArrowRight width={25} height={25} />
       </Button>
       {/* <Input
-        className="w-[50px] h-8 focus-visible:ring-0 rounded-none"
+        className="w-[50px] h-8 focus-visible:ring"
         onChange={handleChange}
         value={value}
       /> */}
       {/* <Button
         onClick={increment}
         variant="outline"
-        className="p-2 rounded-l-none border-l-0"
+        className="p-2  border-l-0"
         size="icon"
       >
         <Plus className="size-4" />
