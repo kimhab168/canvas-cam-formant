@@ -565,7 +565,6 @@ const buildEditor = ({
     selectedObjects,
   };
 };
-
 export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
   const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
@@ -575,22 +574,12 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
   const [fillColor, setFillColor] = useState(FILL_COLOR);
   const [strokeColor, setStrokeColor] = useState(STROKE_COLOR);
   const [strokeWidth, setStrokeWidth] = useState(STROKE_WIDTH);
-  const [strokeDashArray, setStrokeDashArray] =
-    useState<number[]>(STROKE_DASH_ARRAY);
+  const [strokeDashArray, setStrokeDashArray] = useState<number[]>(STROKE_DASH_ARRAY);
 
-  const { save, canRedo, canUndo, redo, undo, canvasHistory, setHistoryIndex } =
-    useHistory({ canvas });
-
+  const { save, canRedo, canUndo, redo, undo, canvasHistory, setHistoryIndex } = useHistory({ canvas });
   useWindowEvent();
-
-  //clipboard hook (copy & paste features)
   const { copy, paste } = useClipboard({ canvas });
-
-  const { moveLeft, moveDown, moveRight, moveUp } = useArrowKey({
-    canvas,
-    step: 10,
-  }); //TODO:
-
+  const { moveLeft, moveDown, moveRight, moveUp } = useArrowKey({ canvas, step: 10 });
   const { autoZoom } = useAutoResize({ canvas, container });
 
   UseCanvasEvents({
@@ -611,11 +600,70 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
     moveLeft,
     moveRight,
     moveUp,
-  }); //paste to make shortcut keys in useHotkeys Hook
+  });
 
-  //useMemo to save the state on the memory when the state change so the re-render won't effect the Memo
+  // Handle touch events for mobile gestures, including zoom in and out
+  const handleTouchEvents = useCallback(() => {
+    if (!canvas) return;
+
+    const info = document.getElementById('touchInfo');
+    if (!info) return;
+
+    // Initial zoom scale
+    let lastZoomScale = 1;
+
+    canvas.on({
+      'touch:gesture': function (event) {
+        var text = document.createTextNode(' Gesture ');
+        info.insertBefore(text, info.firstChild);
+
+        // Check if event.e.touches is available for gesture scaling
+        if (event.e.touches && event.e.touches.length === 2) {
+          // Pinch zoom scaling based on the gesture scale
+          const scale = event.e.scale;
+          const zoom = canvas.getZoom() * scale / lastZoomScale;
+
+          // Set limits to prevent over-zooming
+          if (zoom > 5) {
+            canvas.setZoom(5); // Maximum zoom level
+          } else if (zoom < 0.2) {
+            canvas.setZoom(0.2); // Minimum zoom level
+          } else {
+            canvas.setZoom(zoom); // Apply zoom
+          }
+
+          lastZoomScale = scale; // Update last zoom scale for the next event
+          event.e.preventDefault(); // Prevent default pinch-to-zoom behavior on the webpage
+        }
+      },
+      'touch:drag': function () {
+        var text = document.createTextNode(' Dragging ');
+        info.insertBefore(text, info.firstChild);
+      },
+      'touch:orientation': function () {
+        var text = document.createTextNode(' Orientation ');
+        info.insertBefore(text, info.firstChild);
+      },
+      'touch:shake': function () {
+        var text = document.createTextNode(' Shaking ');
+        info.insertBefore(text, info.firstChild);
+      },
+      'touch:longpress': function () {
+        var text = document.createTextNode(' Longpress ');
+        info.insertBefore(text, info.firstChild);
+      },
+    });
+
+    // Reset the lastZoomScale when the touch ends
+    canvas.on('touch:end', function () {
+      lastZoomScale = 1;
+    });
+  }, [canvas]);
+
+  // useMemo to save the state on the memory when the state changes so the re-render won't affect the Memo
   const editor = useMemo(() => {
     if (canvas) {
+      handleTouchEvents(); // Initialize touch events when canvas is ready
       return buildEditor({
         moveLeft,
         moveRight,
@@ -660,25 +708,20 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
     strokeDashArray,
     fontFamily,
     autoZoom,
+    handleTouchEvents,
   ]);
 
   const init = useCallback(
-    ({
-      initialCanvas,
-      initialContainer,
-    }: {
-      initialCanvas: fabric.Canvas;
-      initialContainer: HTMLDivElement;
-    }) => {
-      //custome prototype of object(shape)
+    ({ initialCanvas, initialContainer }) => {
+      // Custom prototype of object(shape)
       fabric.Object.prototype.set({
-        cornerColor: "#ff5c00",
-        cornerStyle: "rect",
-        borderColor: "#ff5c00",
+        cornerColor: '#ff5c00',
+        cornerStyle: 'rect',
+        borderColor: '#ff5c00',
         borderScaleFactor: 1.5,
         transparentCorners: false,
         borderOpacityWhenMoving: 1,
-        cornerStrokeColor: "#ff5c00",
+        cornerStrokeColor: '#ff5c00',
         padding: 15,
         cornerSize: 10,
       });
@@ -686,11 +729,12 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
       const initialWorkspace = new fabric.Rect({
         width: 620,
         height: 877,
-        name: "clip",
-        fill: "white",
+        name: 'clip',
+        fill: 'white',
         selectable: false,
         hasControls: false,
-        shadow: new fabric.Shadow({ color: "rgba(0,0,0,0.8)", blur: 5 }),
+        shadow: new fabric.Shadow({ color: 'rgba(0,0,0,0.8)', blur: 5 }),
+
       });
       initialCanvas.setWidth(initialContainer.offsetWidth);
       initialCanvas.setHeight(initialContainer.offsetHeight);
@@ -706,8 +750,8 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
       canvasHistory.current = [currentState];
       setHistoryIndex(0);
     },
-    [canvasHistory, setHistoryIndex] //no need these depenencies
+    [canvasHistory, setHistoryIndex]
   );
 
-  return { init, editor };
+  return { init, editor, canvas };
 };
