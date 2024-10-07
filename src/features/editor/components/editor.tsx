@@ -94,11 +94,6 @@ const Editor = () => {
       </div>
 
       <div className="h-[calc(100%-68px-80px)] flex">
-        <OpacitySidebar
-          editor={editor}
-          activeTool={activeTool}
-          onChangeActiveTool={onChangeActiveTool}
-        />
         <ImagesSidebar
           editor={editor}
           activeTool={activeTool}
@@ -115,9 +110,18 @@ const Editor = () => {
           <div
             className="flex-1 h-[calc(100%-124px)] bg-muted"
             ref={containerRef}
+            onClick={(e) => {
+              setActiveTool("select");
+              e.stopPropagation();
+            }}
           >
             <canvas ref={canvasRef} />
           </div>
+          <OpacitySidebar
+            editor={editor}
+            activeTool={activeTool}
+            onChangeActiveTool={onChangeActiveTool}
+          />
           <StrokeColorSidebar
             editor={editor}
             activeTool={activeTool}
@@ -144,6 +148,7 @@ const Editor = () => {
             activeTool={activeTool}
             onChangeActiveTool={onChangeActiveTool}
           />
+
           <Footer editor={editor} />
         </main>
       </div>

@@ -54,17 +54,20 @@ export const OpacitySidebar = ({
   return (
     <aside
       className={cn(
-        "bg-white relative border-r z-[40] w-[150px] h-full flex flex-col",
+        " relative border-r z-[40] w-full h-[200px] flex flex-col mt-2",
         activeTool === "opacity" ? "visible" : "hidden"
       )}
     >
       {/* Header Sidebar */}
-      <ToolSidebarHeader
+      {/* <ToolSidebarHeader
         title="Opacity"
         description="Change the opacity of this elected object"
-      />
+      /> */}
+      <div className="w-full flex justify-center">
+        <ToolSidebarClose onClick={onClose}/>
+      </div>
       <ScrollArea>
-        <div className="p-4 space-y-6 border-b">
+        <div className="p-4 bg-white space-y-6 border-b">
           <Slider
             value={[opacity]}
             onValueChange={(values) => onChange(values[0])}
@@ -75,7 +78,7 @@ export const OpacitySidebar = ({
         </div>
       </ScrollArea>
       {/* Footer SideBar */}
-      <ToolSidebarClose onClick={onClose} />
+      
     </aside>
   );
 };

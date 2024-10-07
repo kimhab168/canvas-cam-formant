@@ -698,7 +698,6 @@ export const useEditor = ({ clearSelectionCallback }: EditorHookProps) => {
       initialCanvas.add(initialWorkspace);
       initialCanvas.centerObject(initialWorkspace);
       initialCanvas.clipPath = initialWorkspace;
-      addZoomAndPan(initialCanvas);
 
       setCanvas(initialCanvas);
       setContainer(initialContainer);

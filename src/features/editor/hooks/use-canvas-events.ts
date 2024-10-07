@@ -18,9 +18,24 @@ export const UseCanvasEvents = ({
     if (canvas) {
       canvas.on("object:added", () => save());
       canvas.on("object:removed", () => save());
-      canvas.on("object:modified", () => save());
+      canvas.on("object:modified", () => {
+        const activeObject = canvas.getActiveObject();
+        // More general check using 'text' in the object type
+        if (activeObject && activeObject.type?.includes("text")) {
+          const originalFontSize = (activeObject as fabric.Textbox).fontSize;
+          const scaleX = activeObject.scaleX||1; // Scale factor in X direction
+          const scaleY = activeObject.scaleY||1; // Scale factor in Y direction
+
+          // Calculate the effective font size based on the scaling factors
+          const effectiveFontSize = Math.round(originalFontSize! * Math.min(scaleX, scaleY));
+
+          console.log("Original font size:", originalFontSize);
+          console.log("Effective font size after scaling:", effectiveFontSize);
+          save();
+      }});
       canvas.on("selection:created", (e) => {
-        // console.log("selection created");
+
+        console.log("selection created , hello success");
 
         setSelectedObjects(e.selected || []);
       });

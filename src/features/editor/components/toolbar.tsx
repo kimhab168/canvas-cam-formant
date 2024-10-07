@@ -243,6 +243,7 @@ export const Toolbar = ({
           </Hint>
         </div>
       )}
+      {/* font size of text */}
       {isText && (
         <div className="flex items-center h-full justify-center">
           <Hint label="Font Size" side="top" sideOffset={5}>
@@ -253,8 +254,6 @@ export const Toolbar = ({
               className={cn(activeTool === "fontSize" && "bg-gray-100")}
             >
               <FontSize width={32} height={32} />
-
-              {/* <FaBold  /> */}
             </Button>
           </Hint>
         </div>
@@ -273,7 +272,7 @@ export const Toolbar = ({
           </Hint>
         </div>
       )}
-
+      {/* font Bold */}
       {isText && activeTool === "format" && (
         <div className="flex absolute bottom-[108px] z-[40] left-20 bg-white p-1">
           <div className="flex items-center h-full justify-center">
@@ -407,6 +406,7 @@ export const Toolbar = ({
           </Hint>
         </div>
       )}
+      {/* arrowUp button */}
       <div className="flex items-center h-full justify-center">
         <Hint label="Bring Forward" side="top" sideOffset={5}>
           <Button
@@ -418,6 +418,7 @@ export const Toolbar = ({
           </Button>
         </Hint>
       </div>
+      {/* arrowDown button */}
       <div className="flex items-center h-full justify-center">
         <Hint label="Send Backward" side="top" sideOffset={5}>
           <Button
@@ -429,6 +430,7 @@ export const Toolbar = ({
           </Button>
         </Hint>
       </div>
+      {/* opacity button */}
       <div className="flex items-center h-full justify-center">
         <Hint label="Opacity" side="top" sideOffset={5}>
           <Button
@@ -441,6 +443,7 @@ export const Toolbar = ({
           </Button>
         </Hint>
       </div>
+      {/* copy button */}
       <div className="flex items-center h-full justify-center">
         <Hint label="Duplicate" side="top" sideOffset={5}>
           <Button
@@ -455,6 +458,7 @@ export const Toolbar = ({
           </Button>
         </Hint>
       </div>
+      {/* delete button */}
       <div className="flex items-center h-full justify-center">
         <Hint label="Delete" side="top" sideOffset={5}>
           <Button onClick={() => editor?.delete()} size="icon" variant="ghost">
