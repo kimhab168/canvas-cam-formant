@@ -1,6 +1,7 @@
 import { fabric } from "fabric";
 import { ITextboxOptions } from "fabric/fabric-impl";
 import * as material from "material-colors";
+import { generateUniqueId } from "./utils";
 
 export const JSON_KEYS = [
   "name",
@@ -232,6 +233,7 @@ export const FONT_SIZE = 32;
 export const FONT_WEIGHT = 400;
 
 export const CIRCLE_OPTIONS = {
+  id: generateUniqueId(),
   radius: 125,
   left: 100,
   top: 100,
@@ -240,6 +242,7 @@ export const CIRCLE_OPTIONS = {
   strokeWidth: STROKE_WIDTH,
 };
 export const RECTANGLE_OPTIONS = {
+  id: "rectangle",
   left: 100,
   top: 100,
   fill: FILL_COLOR,

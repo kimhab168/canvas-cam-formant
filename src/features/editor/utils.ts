@@ -135,3 +135,5 @@ export const createFilter = (value: string) => {
   }
   return effect;
 };
+
+export const generateUniqueId = () => `layer_${Math.random().toString(36).substr(2, 9)}`;
